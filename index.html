@@ -1,0 +1,40 @@
+<html>
+	<head>
+		<title>SISTEMA DE RECONOCIMIENTO FACIAL, AUTENTICACION Y AUTORIZACION DE INGRESO</title>
+		
+		<link rel="stylesheet" type="text/css" href="css/estilos.css">
+		<meta name="viewport" content="width=1000, initial-scale=1.0, maximum-scale=1.0">
+
+	    <!-- Loading Bootstrap -->
+	    <link href="Flat-UI-master/dist/css/vendor/bootstrap.min.css" rel="stylesheet">
+
+	    <!-- Loading Flat UI -->
+	    <link href="Flat-UI-master/dist/css/flat-ui.css" rel="stylesheet">
+	    <link href="docs/assets/css/demo.css" rel="stylesheet">
+		<!-- <link rel="stylesheet" type="text/css" href="css/estilos.css"> -->
+	</head>	
+	
+	<body>
+		<video id="camara" autoplay width="640" height="480"></video>
+		<canvas id="foto" width="640" height="480" style="display:none"></canvas>
+		<br>
+		<div id="identificar" class="btn btn-primary btn-large fui-photo" onclick="identificar2()" <i class=""></i>Identificarme</div>
+	</body>
+	
+	
+	<script type="text/javascript" src="js/camara.js"></script>
+	<script type="text/javascript" src="js/identificacion.js"></script>
+	<script type="text/javascript" src="js/webService.js"></script>
+
+	<script type="text/javascript" src="js/serial.js"></script>
+	<script type="text/javascript" src="js/server.js"></script>
+
+	<script src="Flat-UI-master/dist/js/vendor/jquery.min.js"></script>
+    <script src="Flat-UI-master/dist/js/vendor/video.js"></script>
+    <script src="Flat-UI-master/dist/js/flat-ui.min.js"></script>
+    <script src="docs/assets/js/application.js"></script>
+
+	<script type="text/javascript">
+		window.addEventListener("DOMContentLoaded", activarCamara(),false);
+	</script>
+</html>

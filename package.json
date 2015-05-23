@@ -1,0 +1,14 @@
+{
+	"name": "Camara",
+	"main": "./index.html",
+	"window": {
+		"title": "Camara",
+		"toolbar": true,
+		"frame": true,
+		"width": 1000,
+		"height": 700,
+		"min-width": 1000,
+		"min-height": 700,
+		"position": "center"
+	}
+}

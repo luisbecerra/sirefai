@@ -1,0 +1,33 @@
+body{
+	text-align: center;
+	padding:20px;
+	background-color: #2980B9 !important;
+	background-image: url('../img/fondo.png');
+}
+
+#camara{
+	border: 5px solid white;
+	border-radius: 600px;
+	margin: auto;
+	text-align: center;
+}
+
+#identificar{
+	width: 60%;
+	font-size: 1.3em;
+}
+
+.canvas, .video{
+	width: 640px;
+	height: 480px;
+}
+
+#toolbar{
+  z-index: 9999;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  background-color: #1ABC9C;
+  zoom: 0.8;
+}
