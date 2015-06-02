@@ -3,7 +3,7 @@ var serialjs=require('serialport-js').node(); //thats the only difference
 
 serialjs.find(serialDevicesPopulated);
 
-puerto=null;
+puertoSerial=null;
 
 function serialDevicesPopulated(ports){
     //ports arg is a refrence to serialjs.ports
@@ -19,7 +19,7 @@ function serialDevicesPopulated(ports){
 
 function start(port){
 
-    puerto=port;
+    puertoSerial=port;
     port.on(
         'data',
         gotData

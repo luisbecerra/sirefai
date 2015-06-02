@@ -1,3 +1,4 @@
+/*
 var fs = require('fs');
 var http = require('http');
 var ip = '192.168.1.2';
@@ -24,4 +25,4 @@ var server4 = http.createServer(function(request, response) {
     response.end('<b style="font-size:2em">Visitante rechazado</b><br><a href="http://'+ ip +':4000/" style="font-size:2em">Inicio</a>');
 	puerto.send("B");
 }).listen(7000, ip);
-
+*/

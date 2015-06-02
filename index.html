@@ -10,15 +10,26 @@
 
 	    <!-- Loading Flat UI -->
 	    <link href="Flat-UI-master/dist/css/flat-ui.css" rel="stylesheet">
-	    <link href="docs/assets/css/demo.css" rel="stylesheet">
 		<!-- <link rel="stylesheet" type="text/css" href="css/estilos.css"> -->
 	</head>	
 	
 	<body>
+		<div id="toolbar">
+        <div class="btn-group" id="gr-ctrl-ventana">
+          <button type="button" id="win-close" class="btn btn-primary fui-cross-circle"></button>
+          <button type="button" id="win-minimize" class="btn btn-primary fui-triangle-down"></button>
+          <button type="button" id="win-maximize" class="btn btn-primary fui-window"></button>
+        </div>
+      </div>
+		<br>
+		<br>
+
 		<video id="camara" autoplay width="640" height="480"></video>
 		<canvas id="foto" width="640" height="480" style="display:none"></canvas>
 		<br>
-		<div id="identificar" class="btn btn-primary btn-large fui-photo" onclick="identificar2()" <i class=""></i>Identificarme</div>
+		<div id="identificar" class="btn btn-primary btn-large fui-photo" onclick="identificar()">Identificarme</div>
+
+		<div id="flash" class="oculto"></div>
 	</body>
 	
 	
@@ -29,10 +40,12 @@
 	<script type="text/javascript" src="js/serial.js"></script>
 	<script type="text/javascript" src="js/server.js"></script>
 
+
 	<script src="Flat-UI-master/dist/js/vendor/jquery.min.js"></script>
-    <script src="Flat-UI-master/dist/js/vendor/video.js"></script>
     <script src="Flat-UI-master/dist/js/flat-ui.min.js"></script>
-    <script src="docs/assets/js/application.js"></script>
+    
+
+    <script type="text/javascript" src="js/gui.js"></script>
 
 	<script type="text/javascript">
 		window.addEventListener("DOMContentLoaded", activarCamara(),false);

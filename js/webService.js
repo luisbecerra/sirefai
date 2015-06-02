@@ -1,97 +1,47 @@
 /**
- * 
+ * Envia una imagen guardada en el disco (out.png) al servidor
+ * Ejecuta la funcion callbackOk si la imagen fue recibida correctamente
+ * Ejecuta la funcion callbackFail si la imagen no pudo ser enviada
+ *
+ * @param {function} callbackOk
+ * @param {function} callbackFail
  */
-function invocarServicioSOAP(webServiceURL, soapMessage) {
-	
-    $.ajax({
-        url: webServiceURL,      
-        type: "GET",
-        cache: false,
-        data: soapMessage,
-        contentType: "text/xml",
-        success: onSuccess,
-        error: onError
-    });
-    return false;		
-}
-
-function onSuccess(data, status)
-{
-	alert("exito"+" "+data+" "+status);
-}
-
-function onError(request, status, error)  //Funcion que se ejecuta si ocurre algun error
-{
-	alert("fallo "+error+" "+status);
-}
-
-function invocarServicioREST(webServiceURL, message) {
-	
-    $.ajax({
-        url: webServiceURL,      
-        type: "POST",
-        cache: false,
-		data: message,
-		dataType: "json",
-        success: onSuccessRest,
-        error: onErrorRest
-    });
-    return false;		
-}
-
-function onSuccessRest(data, status)
-{
-	alert("exito"+" "+JSON.stringify(data)+" "+status);
-}
-
-function onErrorRest(request, status, error)  //Funcion que se ejecuta si ocurre algun error
-{
-	alert("fallo "+error+" "+status);
-}
-/*
-function pruebaServer(){
-   
-    var data = { "image": tomarFoto() };
-    
-    $.ajax({
-        type: "POST",
-        url: "http://52.10.240.204:9000/recognize/",
-        dataType: 'json',
-        data: data
-    })
-    .done(function (response) {
-        console.log(response);
-    })
-    .fail(function (jqXHR, textStatus, errorThrown) {
-        console.log(jqXHR);
-        console.log(textStatus);
-        console.log(errorThrown);
-    });
-}
-*/
-
-function pruebaServer(){
-
-    var base64Data = tomarFoto().replace(/^data:image\/png;base64,/, "");
+function enviarImagen(callbackOk,callbackFail){
     var fs = require('fs');
-    var path = require('path');
     var request = require('request');
 
-    var req = request.post("http://52.10.240.204:9000/recognize/", function (err, resp, body) {
-        if (err) {
-            console.log('Error!');
-        } else {
-            console.log('URL: ' + body);
-        }
+    var req = request.post("http://52.25.109.66:9000/recognize/", function (err, resp, body) {
+        if(err)
+            callbackFail(err);
+        else
+            callbackOk(resp,body);
     });
 
     var form = req.form();
-    form.append('image', fs.createReadStream('out.png'));
-    
+    form.append('image', fs.createReadStream('out.png'));   
 }
 
-function saveImg(){
-    var base64Data = tomarFoto().replace(/^data:image\/png;base64,/, "");
+/**
+ * Pregunta al servidor si la persona fue aceptada o no y ejecuta un callback
+ *
+ * @param {function} callbackOk
+ */
+function recibirRespuesta(callbackOk){
+    $.get("http://52.25.109.66:9000/recognize/", function(respuestaSolicitud){
+        console.log(respuestaSolicitud);
+        callbackOk(respuestaSolicitud);
+    })
+}
+
+/**
+ * Convierte una foto codificada en base64 a un archivo png
+ *
+ * @param {String} fotoBase64
+ * @param {function} callbackOk
+ */
+
+function guardarImagen(fotoBase64,callbackOk){
+    var base64Data = fotoBase64.replace(/^data:image\/png;base64,/, "");
     var fs = require('fs');
     var path = require('path');
 
@@ -99,7 +49,6 @@ function saveImg(){
         if(err)
             console.log("error al guardar imagen");
 
-        $('#inputFoto').val(path.resolve('out.png'));
+        callbackOk();
     });
-
 }
