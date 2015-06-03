@@ -6,7 +6,9 @@ var tiempoRespuestaServer = 0;
  *
  */
 function identificar(){
-	puerto.send("0");
+	if(puertoSerial)
+		puertoSerial.send("0");
+
 	mostrarConteo();
 
 	setTimeout(function(){
@@ -30,7 +32,8 @@ function imagenEnviada(respuesta,cuerpoRespuesta){
 	var respJSON = JSON.parse(cuerpoRespuesta);
 	if(respJSON.user == null){
 		habilitarBoton();
-		puertoSerial.send("0");
+		if(puertoSerial)
+			puertoSerial.send("0");
 		return false;
 	}
 
