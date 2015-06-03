@@ -28,7 +28,6 @@ function enviarImagen(callbackOk,callbackFail){
  */
 function recibirRespuesta(callbackOk){
     $.get("http://52.25.109.66:9000/recognize/", function(respuestaSolicitud){
-        console.log(respuestaSolicitud);
         callbackOk(respuestaSolicitud);
     })
 }

@@ -6,6 +6,7 @@ var tiempoRespuestaServer = 0;
  *
  */
 function identificar(){
+	puerto.send("0");
 	mostrarConteo();
 
 	setTimeout(function(){
@@ -24,8 +25,16 @@ function identificar(){
  * @param {Object} cuerpoRespuesta
  */
 function imagenEnviada(respuesta,cuerpoRespuesta){
-	console.log(respuesta);
+	//console.log(respuesta);
 	console.log(cuerpoRespuesta);
+	var respJSON = JSON.parse(cuerpoRespuesta);
+	if(respJSON.user == null){
+		habilitarBoton();
+		puertoSerial.send("0");
+		return false;
+	}
+
+
 	deshabilitarBoton();
 
 	tiempoRespuestaServer = 0;
@@ -54,10 +63,21 @@ function excepcionImagen(error){
  * @param {Object} respuesta
  */
 function respuestaRecibida(respuesta){
+	if(respuesta.response == null){
+		console.log(respuesta.response);
+		return false;
+	}
+
 	if(respuesta.response == true){
-		puertoSerial.send("A");
+		console.log('Visitante aceptado');
+		
+		if(puertoSerial)
+			puertoSerial.send("A");
 	}else if(respuesta.response == false){
-		puertoSerial.send("B");
+		console.log('Visitante rechazado');
+		
+		if(puertoSerial)
+			puertoSerial.send("B");
 	}
 
 	clearInterval(intervaloPeticion);
