@@ -6,8 +6,10 @@ var tiempoRespuestaServer = 0;
  *
  */
 function identificar(){
+	/*
 	if(puertoSerial)
 		puertoSerial.send("0");
+	*/
 
 	mostrarConteo();
 
@@ -32,8 +34,10 @@ function imagenEnviada(respuesta,cuerpoRespuesta){
 	var respJSON = JSON.parse(cuerpoRespuesta);
 	if(respJSON.user == null){
 		habilitarBoton();
+		/*
 		if(puertoSerial)
 			puertoSerial.send("0");
+		*/
 		return false;
 	}
 
@@ -73,14 +77,16 @@ function respuestaRecibida(respuesta){
 
 	if(respuesta.response == true){
 		console.log('Visitante aceptado');
-		
+		/*
 		if(puertoSerial)
 			puertoSerial.send("A");
+		*/
 	}else if(respuesta.response == false){
 		console.log('Visitante rechazado');
-		
+		/*
 		if(puertoSerial)
 			puertoSerial.send("B");
+		*/
 	}
 
 	clearInterval(intervaloPeticion);
